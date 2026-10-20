@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: world-of-gifts
+    restart: unless-stopped
+    ports:
+      # Cổng bên ngoài:Cổng trong container (bạn có thể đổi 8080 thành 80 hoặc 3000 tùy ý)
+      - "8080:80"
