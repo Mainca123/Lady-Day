@@ -118,6 +118,10 @@ html, body {
   cursor: grab;
 }
 
+#canvas-container canvas {
+  touch-action: none;
+}
+
 #canvas-container:active {
   cursor: grabbing;
 }

@@ -573,13 +573,17 @@ export class GlobeScene {
     this.dragMoved = false;
     this.downPosition = { x: e.clientX, y: e.clientY };
     this.previousMousePosition = { x: e.clientX, y: e.clientY };
+    this.updatePointerPosition(e);
   }
 
-  onPointerMove(e) {
-    // Cập nhật tọa độ chuột cho Raycasting
+  updatePointerPosition(e) {
     const rect = this.renderer.domElement.getBoundingClientRect();
     this.mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     this.mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  }
+
+  onPointerMove(e) {
+    this.updatePointerPosition(e);
 
     if (this.isDragging) {
       const deltaX = e.clientX - this.previousMousePosition.x;
@@ -605,6 +609,7 @@ export class GlobeScene {
 
   onPointerUp(e) {
     if (!this.isDragging) return;
+    this.updatePointerPosition(e);
     this.isDragging = false;
 
     // Nếu không kéo rê đáng kể thì tính là Click chọn điểm sáng
